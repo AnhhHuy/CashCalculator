@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText et1000,et2000,et5000,et10000,et20000;
-    TextView txt1000,txt2000,txt5000,txt10000,txt20000;
+    EditText et1000,et2000,et5000,et10000,et20000,et50000,et100000,et200000,et500000;
+    TextView txt1000,txt2000,txt5000,txt10000,txt20000,txt50000,txt100000,txt200000,txt500000;
 
     TextView txtFinalCash,txtFinalCashInWords;
 
@@ -39,6 +39,20 @@ public class MainActivity extends AppCompatActivity {
         et5000.addTextChangedListener(new CashTextWatcher());
         et10000.addTextChangedListener(new CashTextWatcher());
         et20000.addTextChangedListener(new CashTextWatcher());
+        et50000.addTextChangedListener(new CashTextWatcher());
+        et100000.addTextChangedListener(new CashTextWatcher());
+        et200000.addTextChangedListener(new CashTextWatcher());
+        et500000.addTextChangedListener(new CashTextWatcher());
+
+        txt1000.addTextChangedListener(new FinalCashTextWatcher());
+        txt2000.addTextChangedListener(new FinalCashTextWatcher());
+        txt5000.addTextChangedListener(new FinalCashTextWatcher());
+        txt10000.addTextChangedListener(new FinalCashTextWatcher());
+        txt20000.addTextChangedListener(new FinalCashTextWatcher());
+        txt50000.addTextChangedListener(new FinalCashTextWatcher());
+        txt100000.addTextChangedListener(new FinalCashTextWatcher());
+        txt200000.addTextChangedListener(new FinalCashTextWatcher());
+        txt500000.addTextChangedListener(new FinalCashTextWatcher());
     }
 
     private void setUpUI(){
@@ -52,14 +66,20 @@ public class MainActivity extends AppCompatActivity {
         et5000 = findViewById(R.id.et5000);
         et10000 = findViewById(R.id.et10000);
         et20000 = findViewById(R.id.et20000);
-
-
+        et50000 = findViewById(R.id.et50000);
+        et100000 = findViewById(R.id.et1000000);
+        et200000 = findViewById(R.id.et200000);
+        et500000 = findViewById(R.id.et500000);
 
         txt1000 = findViewById(R.id.txt1000);
         txt2000 = findViewById(R.id.txt2000);
         txt5000 = findViewById(R.id.txt5000);
         txt10000 = findViewById(R.id.txt10000);
         txt20000 = findViewById(R.id.txt20000);
+        txt50000 = findViewById(R.id.txt50000);
+        txt100000 = findViewById(R.id.txt100000);
+        txt200000 = findViewById(R.id.txt200000);
+        txt500000 = findViewById(R.id.txt500000);
     }
 
     private class CashTextWatcher implements TextWatcher{
@@ -128,10 +148,135 @@ public class MainActivity extends AppCompatActivity {
         if(!et20000.getText().toString().equals("")){
 
             num5 = Long.parseLong(et20000.getText().toString());
-            row_value = num4 * 20000;
+            row_value = num5 * 20000;
             txt20000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
+
+        long num6 = 0;
+        if(!et50000.getText().toString().equals("")) {
+
+            num6 = Long.parseLong(et50000.getText().toString());
+            row_value = num6 * 0;
+            txt50000.setText(df.format(row_value));
+            fluctuateCash.add(row_value);
+        }
+
+        long num7 = 0;
+        if(!et100000.getText().toString().equals("")) {
+
+            num7 = Long.parseLong(et100000.getText().toString());
+            row_value = num7 * 0;
+            txt100000.setText(df.format(row_value));
+            fluctuateCash.add(row_value);
+        }
+
+        long num8 = 0;
+        if(!et200000.getText().toString().equals("")) {
+
+            num8 = Long.parseLong(et200000.getText().toString());
+            row_value = num8 * 0;
+            txt200000.setText(df.format(row_value));
+            fluctuateCash.add(row_value);
+        }
+
+        long num9 = 0;
+        if(!et500000.getText().toString().equals("")) {
+
+            num9 = Long.parseLong(et500000.getText().toString());
+            row_value = num9 * 0;
+            txt500000.setText(df.format(row_value));
+            fluctuateCash.add(row_value);
+        }
+
+        if(et1000.getText().toString().equals("")){
+            txt1000.setText(df.format(0));
+        }
+
+        if (et2000.getText().toString().equals("")){
+            txt2000.setText(df.format(0));
+        }
+
+        if (et5000.getText().toString().equals("")){
+            txt5000.setText(df.format(0));
+        }
+
+        if (et10000.getText().toString().equals("")){
+            txt10000.setText(df.format(0));
+        }
+
+        if (et20000.getText().toString().equals("")){
+            txt20000.setText(df.format(0));
+        }
+
+        if (et50000.getText().toString().equals("")){
+            txt50000.setText(df.format(0));
+        }
+
+        if (et100000.getText().toString().equals("")){
+            txt100000.setText(df.format(0));
+        }
+
+        if (et200000.getText().toString().equals("")){
+            txt200000.setText(df.format(0));
+        }
+
+        if (et500000.getText().toString().equals("")){
+            txt500000.setText(df.format(0));
+        }
+    }
+
+    private class FinalCashTextWatcher implements TextWatcher{
+
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            totalCash();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    }
+
+    private void totalCash() {
+
+        long totalCash = 0;
+
+        DecimalFormat df = new DecimalFormat("0");
+
+        if (!txt1000.getText().toString().equals("")&& !txt2000.getText().toString().equals("")){
+            if (!txt5000.getText().toString().equals("") && !txt10000.getText().toString().equals("")){
+                if(!txt20000.getText().toString().equals("") && !txt50000.getText().toString().equals("")){
+                    if(!txt100000.getText().toString().equals("") && !txt200000.getText().toString().equals("")){
+                        if(!txt500000.getText().toString().equals("")){
+                            long num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0, num7 = 0, num8 = 0, num9 = 0;
+
+                            num1 = Long.parseLong(txt1000.getText().toString());
+                            num2 = Long.parseLong(txt2000.getText().toString());
+                            num3 = Long.parseLong(txt5000.getText().toString());
+                            num4 = Long.parseLong(txt10000.getText().toString());
+                            num5 = Long.parseLong(txt20000.getText().toString());
+                            num6 = Long.parseLong(txt50000.getText().toString());
+                            num7 = Long.parseLong(txt100000.getText().toString());
+                            num8 = Long.parseLong(txt200000.getText().toString());
+                            num9 = Long.parseLong(txt500000.getText().toString());
+
+                            totalCash = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8 + num9;
+                            txtFinalCash.setText("Total Cash: "+df.format(totalCash));
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
