@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btReset;
 
-    ArrayList<Long> fluctuateCash;
+    ArrayList<Integer> fluctuateCash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,38 @@ public class MainActivity extends AppCompatActivity {
         txt100000.addTextChangedListener(new FinalCashTextWatcher());
         txt200000.addTextChangedListener(new FinalCashTextWatcher());
         txt500000.addTextChangedListener(new FinalCashTextWatcher());
+
+        btReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearData();
+            }
+        });
+    }
+
+    private void clearData() {
+
+        txtFinalCashInWords.setText("0");
+        txtFinalCash.setText("0");
+        txt1000.setText("0");
+        txt2000.setText("0");
+        txt5000.setText("0");
+        txt10000.setText("0");
+        txt20000.setText("0");
+        txt50000.setText("0");
+        txt100000.setText("0");
+        txt200000.setText("0");
+        txt500000.setText("0");
+
+        et1000.setText("");
+        et2000.setText("");
+        et5000.setText("");
+        et10000.setText("");
+        et20000.setText("");
+        et50000.setText("");
+        et100000.setText("");
+        et200000.setText("");
+        et500000.setText("");
     }
 
     private void setUpUI(){
@@ -103,88 +136,88 @@ public class MainActivity extends AppCompatActivity {
 
     private void cashCalculate() {
 
-        long row_value = 0;
+        int row_value = 0;
         DecimalFormat df = new DecimalFormat("0");
-        long num1 = 0;
+        int num1 = 0;
         if(!et1000.getText().toString().equals("")){
 
-            num1 = Long.parseLong(et1000.getText().toString());
+            num1 = Integer.parseInt(et1000.getText().toString());
             row_value = num1 * 1000;
             txt1000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
-        long num2 = 0;
+        int num2 = 0;
         if(!et2000.getText().toString().equals("")){
 
-            num2 = Long.parseLong(et2000.getText().toString());
+            num2 = Integer.parseInt(et2000.getText().toString());
             row_value = num2 * 2000;
             txt2000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
 
-        long num3 = 0;
+        int num3 = 0;
         if(!et5000.getText().toString().equals("")){
 
-            num3 = Long.parseLong(et5000.getText().toString());
+            num3 = Integer.parseInt(et5000.getText().toString());
             row_value = num3 * 5000;
             txt5000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
 
-        long num4 = 0;
+        int num4 = 0;
         if(!et10000.getText().toString().equals("")){
 
-            num4 = Long.parseLong(et10000.getText().toString());
+            num4 = Integer.parseInt(et10000.getText().toString());
             row_value = num4 * 10000;
             txt10000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
 
-        long num5 = 0;
+        int num5 = 0;
         if(!et20000.getText().toString().equals("")){
 
-            num5 = Long.parseLong(et20000.getText().toString());
+            num5 = Integer.parseInt(et20000.getText().toString());
             row_value = num5 * 20000;
             txt20000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
 
         }
 
-        long num6 = 0;
+        int num6 = 0;
         if(!et50000.getText().toString().equals("")) {
 
-            num6 = Long.parseLong(et50000.getText().toString());
+            num6 = Integer.parseInt(et50000.getText().toString());
             row_value = num6 * 0;
             txt50000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
         }
 
-        long num7 = 0;
+        int num7 = 0;
         if(!et100000.getText().toString().equals("")) {
 
-            num7 = Long.parseLong(et100000.getText().toString());
+            num7 = Integer.parseInt(et100000.getText().toString());
             row_value = num7 * 0;
             txt100000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
         }
 
-        long num8 = 0;
+        int num8 = 0;
         if(!et200000.getText().toString().equals("")) {
 
-            num8 = Long.parseLong(et200000.getText().toString());
+            num8 = Integer.parseInt(et200000.getText().toString());
             row_value = num8 * 0;
             txt200000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
         }
 
-        long num9 = 0;
+        int num9 = 0;
         if(!et500000.getText().toString().equals("")) {
 
-            num9 = Long.parseLong(et500000.getText().toString());
+            num9 = Integer.parseInt(et500000.getText().toString());
             row_value = num9 * 0;
             txt500000.setText(df.format(row_value));
             fluctuateCash.add(row_value);
@@ -249,29 +282,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void totalCash() {
 
-        long totalCash = 0;
+        int totalCash = 0;
 
         DecimalFormat df = new DecimalFormat("0");
+
+        Main ob = new Main();
 
         if (!txt1000.getText().toString().equals("")&& !txt2000.getText().toString().equals("")){
             if (!txt5000.getText().toString().equals("") && !txt10000.getText().toString().equals("")){
                 if(!txt20000.getText().toString().equals("") && !txt50000.getText().toString().equals("")){
                     if(!txt100000.getText().toString().equals("") && !txt200000.getText().toString().equals("")){
                         if(!txt500000.getText().toString().equals("")){
-                            long num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0, num7 = 0, num8 = 0, num9 = 0;
+                            int num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0, num7 = 0, num8 = 0, num9 = 0;
 
-                            num1 = Long.parseLong(txt1000.getText().toString());
-                            num2 = Long.parseLong(txt2000.getText().toString());
-                            num3 = Long.parseLong(txt5000.getText().toString());
-                            num4 = Long.parseLong(txt10000.getText().toString());
-                            num5 = Long.parseLong(txt20000.getText().toString());
-                            num6 = Long.parseLong(txt50000.getText().toString());
-                            num7 = Long.parseLong(txt100000.getText().toString());
-                            num8 = Long.parseLong(txt200000.getText().toString());
-                            num9 = Long.parseLong(txt500000.getText().toString());
+                            num1 = Integer.parseInt(txt1000.getText().toString());
+                            num2 = Integer.parseInt(txt2000.getText().toString());
+                            num3 = Integer.parseInt(txt5000.getText().toString());
+                            num4 = Integer.parseInt(txt10000.getText().toString());
+                            num5 = Integer.parseInt(txt20000.getText().toString());
+                            num6 = Integer.parseInt(txt50000.getText().toString());
+                            num7 = Integer.parseInt(txt100000.getText().toString());
+                            num8 = Integer.parseInt(txt200000.getText().toString());
+                            num9 = Integer.parseInt(txt500000.getText().toString());
 
                             totalCash = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8 + num9;
                             txtFinalCash.setText("Total Cash: "+df.format(totalCash));
+                            txtFinalCashInWords.setText(String.valueOf(ob.convertNumberToWords(totalCash)));
+
+                            if(txtFinalCashInWords.getText().toString().equals("")){
+                                txtFinalCashInWords.setText(R.string.zero);
+                            }
                         }
                     }
                 }
